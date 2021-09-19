@@ -1,0 +1,21 @@
+.container
+  = form_for :search, remote: true, method: :get, url: search_dashboard_index_path, html: { id: 'search_form' } do |f|
+    .flex.direction-row.items-center
+      .flex.flex-1.mr-4.relative
+        = f.text_field :term, placeholder: 'Search', class: 'flex-1', onkeydown: 'onChangeTextField()'
+      = f.button type: 'button', class: 'btn waves-effect waves-light', onclick: 'onClickSubmitButton()' do
+        | Search
+        i.material-icons.right search
+
+    .card.mt-8
+      .card-content
+        .flex.row-reverse
+          .input-field
+            = f.select :per_page, [10, 25, 40], { selected: 10 }, { onchange: 'onChangeSelect()' }
+            label Number of records
+
+        = f.hidden_field :page, value: @page
+
+        #results_container
+          = render partial: 'results_table', locals: { result: @result, page: @page, per_page: @per_page }
+

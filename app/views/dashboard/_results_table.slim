@@ -1,0 +1,34 @@
+table.striped.responsive-table
+  thead
+    tr
+      th Name
+      th Author
+      th Language
+      th Stargazers count
+      th Forks
+      th Open issues
+  tbody
+    - if result[:items].count == 0
+      tr
+        td colspan=4
+          | No results found
+    - else
+      - result[:items].map do |item|
+        tr
+          td.flex.direction-row.items-center
+            - image_url = item.dig(:owner, :avatar_url)
+            - unless image_url.blank?
+              = image_tag image_url, class: 'mr-4 avatar-uri'
+            span class="mr-1/2"
+              = item[:name]
+            = link_to item[:html_url], class: 'flex', target: '_blank' do
+              i.tiny.material-icons launch
+          td= link_to item.dig(:owner, :login), item.dig(:owner, :html_url), target: '_blank'
+          td= item[:language]
+          td= item[:stargazers_count]
+          td= item[:forks_count]
+          td= item[:open_issues_count]
+
+
+- if result[:items].count > 0
+  = render partial: 'pagination', locals: { result: result, page: page, per_page: per_page }

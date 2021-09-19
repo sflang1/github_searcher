@@ -1,0 +1,25 @@
+- min_page, max_page, max_number_of_pages = get_min_and_max_pages(result, page, per_page)
+- unless max_number_of_pages == 1
+  .flex.column.items-center
+    ul.pagination
+      li class="#{page == 1 ? 'disabled' : 'waves-effect'}"
+        = link_to '', onclick: "onClickPaginate(#{page - 1})" do
+          i.material-icons
+            | chevron_left
+      - unless (min_page..max_page).include? 1
+        li
+          = link_to 'First', '', onclick: "onClickPaginate(1)"
+        li.disabled
+          = link_to '...', ''
+      - (min_page..max_page).map do |index|
+        li class="#{index == page ? 'active' : 'waves-effect'}"
+          = link_to index, '', onclick: "onClickPaginate(#{index})"
+      - unless (min_page..max_page).include? max_number_of_pages
+        li.disabled
+          = link_to '...', ''
+        li
+          = link_to 'Last', '', onclick: "onClickPaginate(#{max_number_of_pages})"
+      li class="#{page == max_number_of_pages ? 'disabled' : 'waves-effect'}"
+        = link_to '', onclick: "onClickPaginate(#{page + 1})" do
+          i.material-icons
+            | chevron_right
