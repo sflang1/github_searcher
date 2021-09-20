@@ -21,19 +21,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
 window.onClickPaginate = (page) => {
   event.preventDefault();
+  document.getElementById('loader').classList.remove('hide');
   document.getElementById('search_page').value = page;
   const elem = document.getElementById('search_form');
   Rails.fire(elem, 'submit');
 }
 
 window.onChangeSelect = () => {
+  document.getElementById('loader').classList.remove('hide');
   document.getElementById('search_page').value = 1;
   const elem = document.getElementById('search_form');
   Rails.fire(elem, 'submit');
 }
 
 window.onClickSubmitButton = () => {
+  document.getElementById('loader').classList.remove('hide');
   document.getElementById('search_page').value = 1;
   const elem = document.getElementById('search_form');
   Rails.fire(elem, 'submit');
+}
+
+window.onChangeTextField = () => {
+  const { key } = event;
+
+  if (key === 'Enter') {
+    onClickSubmitButton();
+  }
 }

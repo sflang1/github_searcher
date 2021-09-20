@@ -1,7 +1,17 @@
-.container
+#loader.hide.flex.direction-row.items-center.justify-center
+  .preloader-wrapper.big.small.active
+    .spinner-layer.spinner-green-only
+      .circle-clipper.left
+        .circle
+      .gap-patch
+        .circle
+      .circle-clipper.right
+        .circle
+
+.container.pt-8
   = form_for :search, remote: true, method: :get, url: search_dashboard_index_path, html: { id: 'search_form' } do |f|
     .flex.direction-row.items-center
-      .flex.flex-1.mr-4.relative
+      .flex.flex-1.mr-4
         = f.text_field :term, placeholder: 'Search', class: 'flex-1', onkeydown: 'onChangeTextField()'
       = f.button type: 'button', class: 'btn waves-effect waves-light', onclick: 'onClickSubmitButton()' do
         | Search

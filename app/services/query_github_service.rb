@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'uri'
 require 'net/http'
 
@@ -15,6 +16,6 @@ class QueryGithubService
 
     res = Net::HTTP.get_response(uri)
 
-    res.is_a?(Net::HTTPSuccess) ? [ true, JSON.parse(res.body).deep_symbolize_keys ] :  [ false, {} ]
+    res.is_a?(Net::HTTPSuccess) ? [true, JSON.parse(res.body).deep_symbolize_keys] : [false, { items: [] }]
   end
 end

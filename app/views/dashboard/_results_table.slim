@@ -3,17 +3,17 @@ table.striped.responsive-table
     tr
       th Name
       th Author
+      th Description
       th Language
-      th Stargazers count
-      th Forks
-      th Open issues
+      th Created at
+      th Updated at
   tbody
     - if result[:items].count == 0
       tr
-        td colspan=4
+        td colspan=7
           | No results found
     - else
-      - result[:items].map do |item|
+      - result[:items].map.with_index do |item, index|
         tr
           td.flex.direction-row.items-center
             - image_url = item.dig(:owner, :avatar_url)
@@ -24,10 +24,10 @@ table.striped.responsive-table
             = link_to item[:html_url], class: 'flex', target: '_blank' do
               i.tiny.material-icons launch
           td= link_to item.dig(:owner, :login), item.dig(:owner, :html_url), target: '_blank'
+          td= item[:description]
           td= item[:language]
-          td= item[:stargazers_count]
-          td= item[:forks_count]
-          td= item[:open_issues_count]
+          td= Date.parse(item[:created_at]).strftime('%e %b %Y')
+          td= Date.parse(item[:updated_at]).strftime('%e %b %Y')
 
 
 - if result[:items].count > 0

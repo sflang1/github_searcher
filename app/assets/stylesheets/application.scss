@@ -220,3 +220,11 @@ img.avatar-uri {
   top: 50px;
   z-index: 10;
 }
+
+#loader {
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  position: fixed;
+  background: #1212141c;
+}
